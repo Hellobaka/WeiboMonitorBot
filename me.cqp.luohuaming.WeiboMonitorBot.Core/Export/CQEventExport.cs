@@ -50,7 +50,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.App.Export
 		[DllExport (ExportName = "AppInfo", CallingConvention = CallingConvention.StdCall)]	
 		private static string AppInfo ()	
 		{	
-			return "9,me.cqp.luohuaming.PLUGINNAME";	
+			return "9,me.cqp.luohuaming.WeiboMonitorBot";	
 		}	
 		
 		/// <summary>	
@@ -64,12 +64,12 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.App.Export
 			// 反射获取 AppData 实例	
 			Type appDataType = typeof (AppData);	
 			// 注册一个 CQApi 实例	
-			AppInfo appInfo = new AppInfo ("me.cqp.luohuaming.PLUGINNAME", 1, 9, "酷Q样例应用 for C#", "1.0.0", 1, "JieGG", "酷Q样例应用(V9应用机制)", authCode);	
+			AppInfo appInfo = new AppInfo ("me.cqp.luohuaming.WeiboMonitorBot", 1, 9, "微博检测", "1.0.0", 1, "落花茗", "微博检测", authCode);	
 			appDataType.GetRuntimeProperty ("CQApi").GetSetMethod (true).Invoke (null, new object[] { new CQApi (appInfo) });	
-			AppData.UnityContainer.RegisterInstance<CQApi> ("me.cqp.luohuaming.PLUGINNAME", AppData.CQApi);	
+			AppData.UnityContainer.RegisterInstance<CQApi> ("me.cqp.luohuaming.WeiboMonitorBot", AppData.CQApi);	
 			// 向容器注册一个 CQLog 实例	
 			appDataType.GetRuntimeProperty ("CQLog").GetSetMethod (true).Invoke (null, new object[] { new CQLog (authCode) });	
-			AppData.UnityContainer.RegisterInstance<CQLog> ("me.cqp.luohuaming.PLUGINNAME", AppData.CQLog);	
+			AppData.UnityContainer.RegisterInstance<CQLog> ("me.cqp.luohuaming.WeiboMonitorBot", AppData.CQLog);	
 			// 注册插件全局异常捕获回调, 用于捕获未处理的异常, 回弹给 酷Q 做处理	
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;	
 			// 本函数【禁止】处理其他任何代码，以免发生异常情况。如需执行初始化代码请在Startup事件中执行（Type=1001）。	
@@ -101,18 +101,6 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.App.Export
 		private static void ResolveBackcall ()	
 		{	
 			/*	
-			 * Id: 1	
-			 * Type: 21	
-			 * Name: 私聊消息处理	
-			 * Function: _eventPrivateMsg	
-			 * Priority: 30000	
-			 */	
-			if (AppData.UnityContainer.IsRegistered<IPrivateMessage> ("私聊消息处理"))	
-			{	
-				Event_eventPrivateMsgHandler += AppData.UnityContainer.Resolve<IPrivateMessage> ("私聊消息处理").PrivateMessage;	
-			}	
-			
-			/*	
 			 * Id: 2	
 			 * Type: 2	
 			 * Name: 群消息处理	
@@ -142,28 +130,6 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.App.Export
 		#region --导出方法--	
 		/// <summary>	
 		/// 事件回调, 以下是对应 Json 文件的信息	
-		/// <para>Id: 1</para>	
-		/// <para>Type: 21</para>	
-		/// <para>Name: 私聊消息处理</para>	
-		/// <para>Function: _eventPrivateMsg</para>	
-		/// <para>Priority: 30000</para>	
-		/// <para>IsRegex: False</para>	
-		/// </summary>	
-		public static event EventHandler<CQPrivateMessageEventArgs> Event_eventPrivateMsgHandler;	
-		[DllExport (ExportName = "_eventPrivateMsg", CallingConvention = CallingConvention.StdCall)]	
-		public static int Event_eventPrivateMsg (int subType, int msgId, long fromQQ, IntPtr msg, int font)	
-		{	
-			if (Event_eventPrivateMsgHandler != null)	
-			{	
-				CQPrivateMessageEventArgs args = new CQPrivateMessageEventArgs (AppData.CQApi, AppData.CQLog, 1, 21, "私聊消息处理", "_eventPrivateMsg", 30000, subType, msgId, fromQQ, msg.ToString(CQApi.DefaultEncoding), false);	
-				Event_eventPrivateMsgHandler (typeof (CQEventExport), args);	
-				return (int)(args.Handler ? CQMessageHandler.Intercept : CQMessageHandler.Ignore);	
-			}	
-			return 0;	
-		}	
-		
-		/// <summary>	
-		/// 事件回调, 以下是对应 Json 文件的信息	
 		/// <para>Id: 2</para>	
 		/// <para>Type: 2</para>	
 		/// <para>Name: 群消息处理</para>	
@@ -177,7 +143,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.App.Export
 		{	
 			if (Event_eventGroupMsgHandler != null)	
 			{	
-				CQGroupMessageEventArgs args = new CQGroupMessageEventArgs (AppData.CQApi, AppData.CQLog, 2, 2, "群消息处理", "_eventGroupMsg", 30000, subType, msgId, fromGroup, fromQQ, fromAnonymous, msg.ToString(CQApi.DefaultEncoding), false);	
+				CQGroupMessageEventArgs args = new CQGroupMessageEventArgs (AppData.CQApi, AppData.CQLog, 2, 2, "群消息处理", "_eventGroupMsg", 30000, subType, msgId, fromGroup, fromQQ, "", msg.ToString(CQApi.DefaultEncoding), false);	
 				Event_eventGroupMsgHandler (typeof (CQEventExport), args);	
 				return (int)(args.Handler ? CQMessageHandler.Intercept : CQMessageHandler.Ignore);	
 			}	

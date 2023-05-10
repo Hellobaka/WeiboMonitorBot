@@ -1,19 +1,12 @@
 {
 	"ret": 1,
 	"apiver": 9,
-	"name": "酷Q样例应用 for C#",
+	"name": "微博检测",
 	"version": "1.0.0",
 	"version_id": 1,
-	"author": "JieGG",
-	"description": "酷Q样例应用(V9应用机制)",
+	"author": "落花茗",
+	"description": "微博检测",
 	"event": [
-		{
-			"id": 1,
-			"type": 21,
-			"name": "私聊消息处理",
-			"function": "_eventPrivateMsg",
-			"priority": 30000
-		},
 		{
 			"id": 2,
 			"type": 2,
@@ -30,14 +23,10 @@
 		}
 	],
 	"menu": [
-		{
-			"name": "控制台",
-			"function": "_menuA"
-		}
 	],
-	"status": [ 
+	"status": [
 	],
-	"auth": [ 
+	"auth": [
 		101,
 		106
 	]
