@@ -80,7 +80,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
                 if (o.Any(x => x == uid))
                 {
                     StringBuilder sb = new();
-                    sb.Append($"{timeLine.user.screen_name} 更新了微博, https://weibo.com/u/{timeLine.idstr}");
+                    sb.Append($"{timeLine.user.screen_name} 更新了微博, https://weibo.com/{uid}/{timeLine.idstr}");
                     if (string.IsNullOrEmpty(pic) is false)
                         sb.Append(CQApi.CQCode_Image(pic));
                     MainSave.CQApi.SendGroupMessage(Convert.ToInt64(id.Name), sb.ToString());
