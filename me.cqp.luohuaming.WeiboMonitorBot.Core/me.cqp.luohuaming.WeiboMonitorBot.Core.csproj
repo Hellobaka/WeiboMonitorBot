@@ -238,11 +238,6 @@
     <Compile Include="Export\CQEventExport.cs">
       <DependentUpon>CQExport.tt</DependentUpon>
     </Compile>
-    <Compile Include="Export\CQExport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CQExport.tt</DependentUpon>
-    </Compile>
     <Compile Include="Export\CQMenuExport.cs">
       <DependentUpon>CQExport.tt</DependentUpon>
     </Compile>
@@ -257,18 +252,27 @@
     <None Include="app.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Export\CQExport.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CQExport.tt</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Export\CQExport.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CQExport.cs</LastGenOutput>
+      <LastGenOutput>CQExport.log</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Git仓库\WeiboMonitor\WeiboMonitor\WeiboMonitor.csproj">
+      <Project>{4ec33da0-d96b-4830-a112-bfbb1e681e2d}</Project>
+      <Name>WeiboMonitor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\me.cqp.luohuaming.WeiboMonitorBot.Code\me.cqp.luohuaming.WeiboMonitorBot.Code.csproj">
       <Project>{7a675aac-50c1-49a8-a663-9caa6674c614}</Project>
       <Name>me.cqp.luohuaming.WeiboMonitorBot.Code</Name>
@@ -309,6 +313,9 @@ if exist "$(TargetDir)$(TargetName)\app.json" (del /F /A /Q "$(TargetDir)$(Targe
     <PostBuildEvent>if exist "$(TargetDir)$(TargetName).dll" (
 move "$(TargetDir)$(TargetName).dll" "$(TargetDir)$(TargetName)" 
 ) 
+if exist "$(TargetDir)$(TargetName)\$(TargetName).json" (
+del "$(TargetDir)$(TargetName)\$(TargetName).json"
+)
 if exist "$(TargetDir)app.json" (
 move "$(TargetDir)app.json" "$(TargetDir)$(TargetName)" 
 rename "$(TargetDir)$(TargetName)\app.json" "$(TargetName).json" 

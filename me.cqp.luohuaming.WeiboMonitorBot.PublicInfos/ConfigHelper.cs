@@ -50,6 +50,16 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.PublicInfos
                     return default;
                 if (typeof(T) == typeof(bool))
                     return (T)(object)false;
+                if (typeof(T) == typeof(int[]))
+                    return (T)(object)new int[] { };
+                if (typeof(T) == typeof(long[]))
+                    return (T)(object)new long[] { };
+                if (typeof(T) == typeof(List<int>))
+                    return (T)(object)new List<int> { };
+                if (typeof(T) == typeof(List<long>))
+                    return (T)(object)new List<long> { };
+                if (typeof(T) == typeof(JObject))
+                    return (T)(object)new JObject();
                 if (typeof(T) == typeof(object))
                     return (T)(object)new { };
                 throw new Exception("无法默认返回");
@@ -82,6 +92,14 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.PublicInfos
                 File.WriteAllText(ConfigFileName, "{}");
             var o = JObject.Parse(File.ReadAllText(ConfigFileName));
             return o.ContainsKey(sectionName);
+        }
+        public static void Init(string basePath)
+        {
+            ConfigFileName = Path.Combine(basePath, "Config.json");
+            if (!File.Exists(ConfigFileName))
+            {
+                File.WriteAllText(ConfigFileName, "{}");
+            }
         }
     }
 }

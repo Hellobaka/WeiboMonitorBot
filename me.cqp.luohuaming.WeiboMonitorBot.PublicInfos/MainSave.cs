@@ -2,6 +2,7 @@ using me.cqp.luohuaming.WeiboMonitorBot.Sdk.Cqp;
 using me.cqp.luohuaming.WeiboMonitorBot.Tool.IniConfig;
 using System.Collections.Generic;
 using System.IO;
+using WeiboMonitor;
 
 namespace me.cqp.luohuaming.WeiboMonitorBot.PublicInfos
 {
@@ -15,6 +16,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.PublicInfos
         public static CQApi CQApi { get; set; }
         public static string AppDirectory { get; set; }
         public static string ImageDirectory { get; set; }
+        public static UpdateChecker UpdateChecker { get; set; }
 
         static IniConfig configMain;
         public static IniConfig ConfigMain

@@ -10,6 +10,7 @@
     <RootNamespace>me.cqp.luohuaming.WeiboMonitorBot.PublicInfos</RootNamespace>
     <AssemblyName>me.cqp.luohuaming.WeiboMonitorBot.PublicInfos</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>10</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -37,7 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
@@ -46,7 +47,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>10</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
@@ -71,6 +72,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Git仓库\WeiboMonitor\WeiboMonitor\WeiboMonitor.csproj">
+      <Project>{4ec33da0-d96b-4830-a112-bfbb1e681e2d}</Project>
+      <Name>WeiboMonitor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\me.cqp.luohuaming.WeiboMonitorBot.Sdk\me.cqp.luohuaming.WeiboMonitorBot.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>me.cqp.luohuaming.WeiboMonitorBot.Sdk</Name>
