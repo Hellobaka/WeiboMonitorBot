@@ -269,10 +269,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Git仓库\WeiboMonitor\WeiboMonitor\WeiboMonitor.csproj">
-      <Project>{4ec33da0-d96b-4830-a112-bfbb1e681e2d}</Project>
-      <Name>WeiboMonitor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\me.cqp.luohuaming.WeiboMonitorBot.Code\me.cqp.luohuaming.WeiboMonitorBot.Code.csproj">
       <Project>{7a675aac-50c1-49a8-a663-9caa6674c614}</Project>
       <Name>me.cqp.luohuaming.WeiboMonitorBot.Code</Name>

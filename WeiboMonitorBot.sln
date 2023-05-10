@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "me.cqp.luohuaming.WeiboMoni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "me.cqp.luohuaming.WeiboMonitorBot.PublicInfos", "me.cqp.luohuaming.WeiboMonitorBot.PublicInfos\me.cqp.luohuaming.WeiboMonitorBot.PublicInfos.csproj", "{9CA41650-71F2-4F0C-9A80-9CDB5A7D593C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeiboMonitor", "..\..\Git仓库\WeiboMonitor\WeiboMonitor\WeiboMonitor.csproj", "{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiboMonitor-netframework", "..\..\Git仓库\WeiboMonitor\WeiboMonitor-netframework\WeiboMonitor-netframework.csproj", "{C772AF89-0E70-4A7F-87A0-69B335898E66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,14 +70,14 @@ Global
 		{9CA41650-71F2-4F0C-9A80-9CDB5A7D593C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CA41650-71F2-4F0C-9A80-9CDB5A7D593C}.Release|x86.ActiveCfg = Release|Any CPU
 		{9CA41650-71F2-4F0C-9A80-9CDB5A7D593C}.Release|x86.Build.0 = Release|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Debug|x86.Build.0 = Debug|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Release|x86.ActiveCfg = Release|Any CPU
-		{4EC33DA0-D96B-4830-A112-BFBB1E681E2D}.Release|x86.Build.0 = Release|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Debug|x86.Build.0 = Debug|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Release|x86.ActiveCfg = Release|Any CPU
+		{C772AF89-0E70-4A7F-87A0-69B335898E66}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
