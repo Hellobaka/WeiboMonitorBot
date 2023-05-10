@@ -13,7 +13,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
     {
         public bool ImplementFlag { get; set; } = true;
 
-        public string GetOrderStr() => "#移除番剧";
+        public string GetOrderStr() => "#移除微博";
 
         public bool Judge(string destStr) => destStr.Replace("＃", "#").StartsWith(GetOrderStr());//这里判断是否能触发指令
 
