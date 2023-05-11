@@ -35,21 +35,21 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
                 sendText.MsgToSend.Add("请填写用户UID");
                 return result;
             }
-            if (!int.TryParse(args, out int sid))
+            if (!long.TryParse(args, out long uid))
             {
                 sendText.MsgToSend.Add("用户UID或序号格式不正确");
                 return result;
             }
-            var weiboList = ConfigHelper.GetConfig<List<int>>("Weibos");
+            var weiboList = ConfigHelper.GetConfig<List<long>>("Weibos");
             var group = ConfigHelper.GetConfig<JObject>("Monitor");
             if (group.ContainsKey(e.FromGroup))
             {
-                var groupArr = group[e.FromGroup].ToObject<List<int>>();
-                if (!groupArr.Any(x => x == sid))
+                var groupArr = group[e.FromGroup].ToObject<List<long>>();
+                if (!groupArr.Any(x => x == uid))
                 {
-                    if (groupArr.Count >= sid)
+                    if (groupArr.Count >= uid)
                     {
-                        sid = groupArr[sid - 1];
+                        uid = groupArr[(int)(uid - 1)];
                     }
                     else
                     {
@@ -57,7 +57,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
                         return result;
                     }
                 }
-                group[e.FromGroup].Children().FirstOrDefault(x => x.Value<int>() == sid)?.Remove();
+                group[e.FromGroup].Children().FirstOrDefault(x => x.Value<long>() == uid)?.Remove();
             }
             ConfigHelper.SetConfig("Monitor", group);
             bool existFlag = false;
@@ -65,16 +65,16 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
             {
                 if ((item.Value as JArray).Any(x => {
                     var p = (int)x;
-                    return p == sid;
+                    return p == uid;
                 }))
                 {
                     existFlag = true;
                 }
             }
-            if (weiboList.Any(x => x == sid) && !existFlag)
+            if (weiboList.Any(x => x == uid) && !existFlag)
             {
-                weiboList.Remove(sid);
-                MainSave.UpdateChecker.RemoveWeibo(sid);
+                weiboList.Remove(uid);
+                MainSave.UpdateChecker.RemoveWeibo(uid);
                 ConfigHelper.SetConfig("Weibos", weiboList);
             }
             sendText.MsgToSend.Add("删除成功");

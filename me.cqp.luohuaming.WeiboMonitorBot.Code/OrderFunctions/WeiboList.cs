@@ -37,7 +37,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
             foreach (var item in MainSave.UpdateChecker.GetBangumiList())
             {
                 var group = ConfigHelper.GetConfig<JObject>("Monitor");
-                if (group.ContainsKey(e.FromGroup) && group[e.FromGroup].Any(x => x.Value<int>() == item.Item1))
+                if (group.ContainsKey(e.FromGroup) && group[e.FromGroup].Any(x => x.Value<long>() == item.Item1))
                 {
                     sb.AppendLine($"{index}. {item.Item2} - {item.Item1}");
                     index++;
