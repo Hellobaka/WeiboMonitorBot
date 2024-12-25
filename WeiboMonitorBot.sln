@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "me.cqp.luohuaming.WeiboMoni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "me.cqp.luohuaming.WeiboMonitorBot.PublicInfos", "me.cqp.luohuaming.WeiboMonitorBot.PublicInfos\me.cqp.luohuaming.WeiboMonitorBot.PublicInfos.csproj", "{9CA41650-71F2-4F0C-9A80-9CDB5A7D593C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiboMonitor-netframework", "..\..\Git仓库\WeiboMonitor\WeiboMonitor-netframework\WeiboMonitor-netframework.csproj", "{C772AF89-0E70-4A7F-87A0-69B335898E66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiboMonitor", "WeiboMonitor\WeiboMonitor\WeiboMonitor.csproj", "{C772AF89-0E70-4A7F-87A0-69B335898E66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

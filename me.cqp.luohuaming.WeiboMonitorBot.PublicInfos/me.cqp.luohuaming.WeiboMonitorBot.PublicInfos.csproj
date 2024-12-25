@@ -72,10 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Git仓库\WeiboMonitor\WeiboMonitor-netframework\WeiboMonitor-netframework.csproj">
-      <Project>{c772af89-0e70-4a7f-87a0-69b335898e66}</Project>
-      <Name>WeiboMonitor-netframework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\me.cqp.luohuaming.WeiboMonitorBot.Sdk\me.cqp.luohuaming.WeiboMonitorBot.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>me.cqp.luohuaming.WeiboMonitorBot.Sdk</Name>
@@ -83,6 +79,10 @@
     <ProjectReference Include="..\me.cqp.luohuaming.WeiboMonitorBot.Tool\me.cqp.luohuaming.WeiboMonitorBot.Tool.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>me.cqp.luohuaming.WeiboMonitorBot.Tool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeiboMonitor\WeiboMonitor\WeiboMonitor.csproj">
+      <Project>{c772af89-0e70-4a7f-87a0-69b335898e66}</Project>
+      <Name>WeiboMonitor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
