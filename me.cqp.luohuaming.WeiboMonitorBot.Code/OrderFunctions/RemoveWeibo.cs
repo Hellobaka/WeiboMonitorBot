@@ -83,18 +83,11 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
 
         public FunctionResult Progress(CQPrivateMessageEventArgs e)//私聊处理
         {
-            FunctionResult result = new FunctionResult
+            FunctionResult result = new()
             {
                 Result = false,
                 SendFlag = false,
             };
-            SendText sendText = new SendText
-            {
-                SendID = e.FromQQ,
-            };
-
-            sendText.MsgToSend.Add("这里输入需要发送的文本");
-            result.SendObject.Add(sendText);
             return result;
         }
     }
