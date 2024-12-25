@@ -1,0 +1,3 @@
+[submodule "WeiboMonitor"]
+	path = WeiboMonitor
+	url = https://github.com/Hellobaka/WeiboMonitor.git
