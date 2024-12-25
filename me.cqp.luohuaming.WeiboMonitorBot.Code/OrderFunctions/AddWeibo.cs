@@ -3,6 +3,7 @@ using me.cqp.luohuaming.WeiboMonitorBot.Sdk.Cqp.EventArgs;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using WeiboMonitor.API;
 
 namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
@@ -38,31 +39,32 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
                 sendText.MsgToSend.Add("用户UID格式不正确");
                 return result;
             }
-            var weiboList = ConfigHelper.GetConfig<List<long>>("Weibos");
-            var group = ConfigHelper.GetConfig<JObject>("Monitor");
+            var weiboList = AppConfig.Weibos;
+            var group = AppConfig.Monitor;
             GetTimeLine weibo = null;
             if (!weiboList.Any(x => x == uid))
             {
                 weiboList.Add(uid);
                 weibo = MainSave.UpdateChecker.AddWeibo(uid);
             }
-            if (group.ContainsKey(e.FromGroup))
+            var groupItem = group.FirstOrDefault(x => x.GroupId == e.FromGroup);
+            if (groupItem != null)
             {
-                if (group[e.FromGroup].Contains(uid) && weiboList.Any(x => x == e.FromGroup))
+                if (groupItem.TargetId.Contains(uid) && weiboList.Any(x => x == e.FromGroup))
                 {
                     sendText.MsgToSend.Add("重复添加");
                     return result;
                 }
-                (group[e.FromGroup] as JArray).Add(uid);
+                groupItem.TargetId.Add(uid);
             }
             else
             {
-                group.Add(new JProperty(e.FromGroup, new JArray(uid)));
+                group.Add(new MonitorItem { GroupId = e.FromGroup, TargetId = [uid] });
             }
             if (weibo != null)
             {
-                ConfigHelper.SetConfig("Weibos", weiboList);
-                ConfigHelper.SetConfig("Monitor", group);
+                AppConfig.Instance.SetConfig("Weibos", weiboList);
+                AppConfig.Instance.SetConfig("Monitor", group);
 
                 sendText.MsgToSend.Add($"{weibo.UserName} 添加微博检查成功");
             }

@@ -12,4 +12,11 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.PublicInfos
         FunctionResult Progress(CQGroupMessageEventArgs e);
         FunctionResult Progress(CQPrivateMessageEventArgs e);
     }
+
+    public class MonitorItem
+    {
+        public long GroupId { get; set; }
+
+        public List<long> TargetId { get; set; }
+    }
 }

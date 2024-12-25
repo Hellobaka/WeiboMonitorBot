@@ -4,8 +4,10 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using WeiboMonitor;
 
 namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
 {
@@ -40,16 +42,16 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
                 sendText.MsgToSend.Add("用户UID或序号格式不正确");
                 return result;
             }
-            var weiboList = ConfigHelper.GetConfig<List<long>>("Weibos");
-            var group = ConfigHelper.GetConfig<JObject>("Monitor");
-            if (group.ContainsKey(e.FromGroup))
+            var weiboList = AppConfig.Weibos;
+            var group = AppConfig.Monitor;
+            var groupItem = group.FirstOrDefault(x => x.GroupId == e.FromGroup);
+            if (groupItem != null)
             {
-                var groupArr = group[e.FromGroup].ToObject<List<long>>();
-                if (!groupArr.Any(x => x == uid))
+                if (!groupItem.TargetId.Contains(uid))
                 {
-                    if (groupArr.Count >= uid)
+                    if (groupItem.TargetId.Count >= uid)
                     {
-                        uid = groupArr[(int)(uid - 1)];
+                        uid = groupItem.TargetId[(int)(uid - 1)];
                     }
                     else
                     {
@@ -57,25 +59,23 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
                         return result;
                     }
                 }
-                group[e.FromGroup].Children().FirstOrDefault(x => x.Value<long>() == uid)?.Remove();
+                groupItem.TargetId.Remove(uid);
             }
-            ConfigHelper.SetConfig("Monitor", group);
+            AppConfig.Instance.SetConfig("Monitor", group);
             bool existFlag = false;
-            foreach (JProperty item in group.Properties())
+            foreach (var item in group)
             {
-                if ((item.Value as JArray).Any(x => {
-                    var p = (int)x;
-                    return p == uid;
-                }))
+                if (item.TargetId.Contains(uid))
                 {
                     existFlag = true;
+                    break;
                 }
             }
             if (weiboList.Any(x => x == uid) && !existFlag)
             {
                 weiboList.Remove(uid);
-                MainSave.UpdateChecker.RemoveWeibo(uid);
-                ConfigHelper.SetConfig("Weibos", weiboList);
+                UpdateChecker.Instance.RemoveWeibo(uid);
+                AppConfig.Instance.SetConfig("Weibos", weiboList);
             }
             sendText.MsgToSend.Add("删除成功");
             return result;

@@ -21,7 +21,9 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
             MainSave.CQApi = e.CQApi;
             MainSave.CQLog = e.CQLog;
             MainSave.ImageDirectory = PublicInfos.CommonHelper.GetAppImageDirectory();
-            ConfigHelper.ConfigFileName = Path.Combine(MainSave.AppDirectory, "Config.json");
+            AppConfig appConfig = new(Path.Combine(MainSave.AppDirectory, "Config.json"));
+            appConfig.LoadConfig();
+            appConfig.EnableAutoReload();
             foreach (var item in Assembly.GetAssembly(typeof(Event_GroupMessage)).GetTypes())
             {
                 if (item.IsInterface)
@@ -39,7 +41,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
             }
             if (!Directory.Exists(Path.Combine(MainSave.AppDirectory, "Assets")))
             {
-                MainSave.CQLog.Warning("×ÊÔ´ÎÄ¼ş²»´æÔÚ£¬Çë·ÅÖÃÎÄ¼şºóÖØÔØ²å¼ş");
+                MainSave.CQLog.Warning("èµ„æºæ–‡ä»¶ä¸å­˜åœ¨ï¼Œè¯·æ”¾ç½®æ–‡ä»¶åé‡è½½æ’ä»¶");
                 return;
             }
             UpdateChecker update = new(MainSave.AppDirectory, MainSave.ImageDirectory);
@@ -59,31 +61,28 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
             {
                 update.WeiboCheckCD = 2;
                 update.OnTimeLineUpdate += Update_OnTimeLineUpdate;
-                ConfigHelper.Init(MainSave.AppDirectory);
-                var weibos = ConfigHelper.GetConfig<long[]>("Weibos");
 
-                foreach (var item in weibos)
+                foreach (var item in AppConfig.Weibos)
                 {
                     update.AddWeibo(item);
                 }
                 update.Start();
-                MainSave.CQLog.Info("ÔØÈë³É¹¦", $"¼àÊÓÁË {weibos.Length} ¸öÎ¢²©");
+                MainSave.CQLog.Info("è½½å…¥æˆåŠŸ", $"ç›‘è§†äº† {AppConfig.Weibos.Count} ä¸ªå¾®åš");
             }).Start();
         }
 
         private void Update_OnTimeLineUpdate(WeiboMonitor.Model.TimeLine_Object timeLine, long uid, string pic)
         {
-            var group = ConfigHelper.GetConfig<JObject>("Monitor");
-            foreach (JProperty id in group.Properties())
+            var group = AppConfig.Monitor;
+            foreach (var id in group)
             {
-                var o = id.Value.ToObject<long[]>();
-                if (o.Any(x => x == uid))
+                if (id.TargetId.Any(x => x == uid))
                 {
                     StringBuilder sb = new();
-                    sb.Append($"{timeLine.user.screen_name} ¸üĞÂÁËÎ¢²©, https://weibo.com/{uid}/{timeLine.idstr}");
+                    sb.Append($"{timeLine.user.screen_name} æ›´æ–°äº†å¾®åš, https://weibo.com/{uid}/{timeLine.idstr}");
                     if (string.IsNullOrEmpty(pic) is false)
                         sb.Append(CQApi.CQCode_Image(pic));
-                    MainSave.CQApi.SendGroupMessage(Convert.ToInt64(id.Name), sb.ToString());
+                    MainSave.CQApi.SendGroupMessage(Convert.ToInt64(id), sb.ToString());
                 }
             }
         }
