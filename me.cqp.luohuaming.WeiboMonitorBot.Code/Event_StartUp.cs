@@ -25,6 +25,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
             AppConfig appConfig = new(Path.Combine(MainSave.AppDirectory, "Config.json"));
             appConfig.LoadConfig();
             appConfig.EnableAutoReload();
+            Config.Instance = appConfig;
             foreach (var item in Assembly.GetAssembly(typeof(Event_GroupMessage)).GetTypes())
             {
                 if (item.IsInterface)

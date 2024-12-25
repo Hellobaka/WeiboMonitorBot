@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WeiboMonitor.API;
 using WeiboMonitor_netframework;
 
 namespace me.cqp.luohuaming.WeiboMonitorBot.PublicInfos
@@ -33,6 +34,10 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.PublicInfos
             Config.RetryCount = GetConfig("RetryCount", 3);
             Config.DebugMode = GetConfig("DebugMode", false);
             Config.DynamicFilters = GetConfig("DynamicFilters", new List<string>() { });
+            Config.CurrentCookie_Sub = GetConfig("CurrentCookie_Sub", "");
+            Config.CurrentCookie_Subp = GetConfig("CurrentCookie_Subp", "");
+
+            TokenManager.SetCookie(Config.CurrentCookie_Sub, Config.CurrentCookie_Subp);
         }
     }
 }
