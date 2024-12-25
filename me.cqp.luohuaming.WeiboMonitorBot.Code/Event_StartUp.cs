@@ -2,7 +2,6 @@ using me.cqp.luohuaming.WeiboMonitorBot.PublicInfos;
 using me.cqp.luohuaming.WeiboMonitorBot.Sdk.Cqp;
 using me.cqp.luohuaming.WeiboMonitorBot.Sdk.Cqp.EventArgs;
 using me.cqp.luohuaming.WeiboMonitorBot.Sdk.Cqp.Interface;
-using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Linq;
@@ -29,14 +28,20 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
             foreach (var item in Assembly.GetAssembly(typeof(Event_GroupMessage)).GetTypes())
             {
                 if (item.IsInterface)
+                {
                     continue;
+                }
+
                 foreach (var instance in item.GetInterfaces())
                 {
                     if (instance == typeof(IOrderModel))
                     {
                         IOrderModel obj = (IOrderModel)Activator.CreateInstance(item);
                         if (obj.ImplementFlag == false)
+                        {
                             break;
+                        }
+
                         MainSave.Instances.Add(obj);
                     }
                 }
@@ -59,10 +64,9 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
                     MainSave.CQLog.Debug(type, message);
                 }
             };
+            GetTimeLine.OnTimeLineUpdate += Update_OnTimeLineUpdate;
             new Thread(() =>
             {
-                GetTimeLine.OnTimeLineUpdate += Update_OnTimeLineUpdate;
-
                 foreach (var item in AppConfig.Weibos)
                 {
                     GetTimeLine.AddWeibo(item);
@@ -81,8 +85,11 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
                     StringBuilder sb = new();
                     sb.Append($"{timeLine.user.screen_name} 更新了微博, https://weibo.com/{uid}/{timeLine.idstr}");
                     if (string.IsNullOrEmpty(pic) is false)
+                    {
                         sb.Append(CQApi.CQCode_Image(pic));
-                    MainSave.CQApi.SendGroupMessage(Convert.ToInt64(id), sb.ToString());
+                    }
+
+                    MainSave.CQApi.SendGroupMessage(id.GroupId, sb.ToString());
                 }
             }
         }
