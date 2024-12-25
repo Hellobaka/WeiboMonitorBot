@@ -10,6 +10,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using WeiboMonitor;
+using WeiboMonitor.API;
+using WeiboMonitor_netframework;
 
 namespace me.cqp.luohuaming.WeiboMonitorBot.Code
 {
@@ -44,7 +46,8 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
                 MainSave.CQLog.Warning("资源文件不存在，请放置文件后重载插件");
                 return;
             }
-            UpdateChecker update = new(MainSave.AppDirectory, MainSave.ImageDirectory);
+            Config.BaseDirectory = MainSave.AppDirectory;
+            Config.PicSaveBasePath = MainSave.ImageDirectory;
             LogHelper.InfoMethod = (type, message, status) =>
             {
                 if (!status)
@@ -56,17 +59,14 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code
                     MainSave.CQLog.Debug(type, message);
                 }
             };
-            MainSave.UpdateChecker = update;
             new Thread(() =>
             {
-                update.WeiboCheckCD = 2;
-                update.OnTimeLineUpdate += Update_OnTimeLineUpdate;
+                GetTimeLine.OnTimeLineUpdate += Update_OnTimeLineUpdate;
 
                 foreach (var item in AppConfig.Weibos)
                 {
-                    update.AddWeibo(item);
+                    GetTimeLine.AddWeibo(item);
                 }
-                update.Start();
                 MainSave.CQLog.Info("载入成功", $"监视了 {AppConfig.Weibos.Count} 个微博");
             }).Start();
         }

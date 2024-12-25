@@ -45,7 +45,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
             if (!weiboList.Any(x => x == uid))
             {
                 weiboList.Add(uid);
-                weibo = MainSave.UpdateChecker.AddWeibo(uid);
+                weibo = GetTimeLine.AddWeibo(uid);
             }
             var groupItem = group.FirstOrDefault(x => x.GroupId == e.FromGroup);
             if (groupItem != null)

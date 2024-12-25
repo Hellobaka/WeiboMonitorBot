@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WeiboMonitor;
+using WeiboMonitor.API;
 
 namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
 {
@@ -74,7 +75,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
             if (weiboList.Any(x => x == uid) && !existFlag)
             {
                 weiboList.Remove(uid);
-                UpdateChecker.Instance.RemoveWeibo(uid);
+                GetTimeLine.RemoveWeibo(uid);
                 AppConfig.Instance.SetConfig("Weibos", weiboList);
             }
             sendText.MsgToSend.Add("删除成功");

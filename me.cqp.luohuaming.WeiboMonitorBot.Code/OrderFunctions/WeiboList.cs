@@ -3,6 +3,7 @@ using me.cqp.luohuaming.WeiboMonitorBot.Sdk.Cqp.EventArgs;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Text;
+using WeiboMonitor.API;
 
 namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
 {
@@ -34,7 +35,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.Code.OrderFunctions
             StringBuilder sb = new();
             sb.AppendLine("微博列表");
             int index = 1;
-            foreach (var item in MainSave.UpdateChecker.GetBangumiList())
+            foreach (var item in GetTimeLine.GetWeiboList())
             {
                 var group = AppConfig.Monitor;
                 var groupItem = group.FirstOrDefault(x => x.GroupId == e.FromGroup);
