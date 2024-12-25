@@ -78,10 +78,6 @@
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>me.cqp.luohuaming.WeiboMonitorBot.Sdk</Name>
     </ProjectReference>
-    <ProjectReference Include="..\me.cqp.luohuaming.WeiboMonitorBot.Tool\me.cqp.luohuaming.WeiboMonitorBot.Tool.csproj">
-      <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
-      <Name>me.cqp.luohuaming.WeiboMonitorBot.Tool</Name>
-    </ProjectReference>
     <ProjectReference Include="..\me.cqp.luohuaming.WeiboMonitorBot.PublicInfos\me.cqp.luohuaming.WeiboMonitorBot.PublicInfos.csproj">
       <Project>{9ca41650-71f2-4f0c-9a80-9cdb5a7d593c}</Project>
       <Name>me.cqp.luohuaming.WeiboMonitorBot.PublicInfos</Name>
