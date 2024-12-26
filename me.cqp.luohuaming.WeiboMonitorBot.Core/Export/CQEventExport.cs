@@ -64,7 +64,7 @@ namespace me.cqp.luohuaming.WeiboMonitorBot.App.Export
 			// 反射获取 AppData 实例	
 			Type appDataType = typeof (AppData);	
 			// 注册一个 CQApi 实例	
-			AppInfo appInfo = new AppInfo ("me.cqp.luohuaming.WeiboMonitorBot", 1, 9, "微博检测", "2.0.0", 1, "落花茗", "微博检测", authCode);	
+			AppInfo appInfo = new AppInfo ("me.cqp.luohuaming.WeiboMonitorBot", 1, 9, "微博检测", "2.1.0", 1, "落花茗", "微博检测", authCode);	
 			appDataType.GetRuntimeProperty ("CQApi").GetSetMethod (true).Invoke (null, new object[] { new CQApi (appInfo) });	
 			AppData.UnityContainer.RegisterInstance<CQApi> ("me.cqp.luohuaming.WeiboMonitorBot", AppData.CQApi);	
 			// 向容器注册一个 CQLog 实例	
